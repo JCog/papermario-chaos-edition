@@ -2417,6 +2417,9 @@ segments:
       - [0x3523E0, gfx, D_090021C0_3523E0]
       - [0x352400, gfx, D_090021E0_352400]
       - [0x352420, gfx, D_09002200_352420]
+      - [auto, .gfx, D_090021E0_352400_2]
+      - [auto, .gfx, D_090021C0_3523E0_2]
+      - [auto, .gfx, D_09002200_352420_2]
   - name: effect_purple_ring
     dir: effects
     type: code

@@ -463,7 +463,7 @@ HitResult calc_partner_damage_enemy(void) {
             if (chaosNegativeAttack) {
                 target->damageCounter -= damageDealt;
                 target->hpChangeCounter += damageDealt;
-                battleStatus->lastAttackDamage += 100; // adds a negative symbol
+                //battleStatus->lastAttackDamage += 100; // adds a negative symbol
             } else {
                 target->damageCounter   += damageDealt;
                 target->hpChangeCounter -= damageDealt;

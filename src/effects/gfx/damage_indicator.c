@@ -48,3 +48,6 @@ INCLUDE_IMG("effects/gfx/D_09001A00_351C20.png", D_09001A00_351C20);
 #include "effects/gfx/D_090021C0_3523E0.gfx.inc.c"
 #include "effects/gfx/D_090021E0_352400.gfx.inc.c"
 #include "effects/gfx/D_09002200_352420.gfx.inc.c"
+#include "effects/gfx/D_090021C0_3523E0_2.gfx.inc.c"
+#include "effects/gfx/D_090021E0_352400_2.gfx.inc.c"
+#include "effects/gfx/D_09002200_352420_2.gfx.inc.c"

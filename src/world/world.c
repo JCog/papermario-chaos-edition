@@ -10,26 +10,7 @@
 #include "dx/debug_menu.h"
 #include "world/surfaces.h"
 
-char* BackgroundFileList[] = {
-    "kmr_bg",
-    "nok_bg",
-    "name: sbk_bg",
-    "sbk3_bg",
-    "iwa_bg",
-    "hos_bg",
-    "arn_bg",
-    "obk_bg",
-    "omo_bg",
-    "yos_bg",
-    "jan_bg",
-    "fla_bg",
-    "flb_bg",
-    "sra_bg",
-    "yki_bg",
-    "sam_bg",
-    "kpa_bg",
-    "title_bg"
-};
+extern char* BackgroundFileList[18];
 
 #ifdef SHIFT
 #define ASSET_TABLE_ROM_START (s32) mapfs_ROM_START
@@ -161,6 +142,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     }
 
     if (mapConfig->bgName != NULL) {
+        //50/50 to load random background
         if (rand_int(100) < 50) {
             char* randBackgroundStr = BackgroundFileList[rand_int(ARRAY_COUNT(BackgroundFileList) - 1)];
             strcpy(wMapBgName, randBackgroundStr);

@@ -283,6 +283,27 @@ static void drawEffectList() {
     }
 }
 
+char* BackgroundFileList[] = {
+    "kmr_bg",
+    "nok_bg",
+    "sbk_bg",
+    "sbk3_bg",
+    "iwa_bg",
+    "hos_bg",
+    "arn_bg",
+    "obk_bg",
+    "omo_bg",
+    "yos_bg",
+    "jan_bg",
+    "fla_bg",
+    "flb_bg",
+    "sra_bg",
+    "yki_bg",
+    "sam_bg",
+    "kpa_bg",
+    "title_bg"
+};
+
 void chaosUpdate() {
     for (u32 i = 0; i < 10; i++) {
         if (get_game_mode() == badModes[i]) {
@@ -295,6 +316,10 @@ void chaosUpdate() {
     // select a new effect
     #if CHAOS_DEBUG
     s32 buttons = gGameStatus.pressedButtons[0];
+    //allow scrolling by holding the dpad direction and not pressing any other buttons
+    if (buttons == 0) {
+        buttons = gGameStatus.heldButtons[0];
+    }
     #if DX_DEBUG_MENU
     if (dx_debug_menu_is_open()) {
         buttons = 0;
