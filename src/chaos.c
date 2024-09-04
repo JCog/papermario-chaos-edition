@@ -44,6 +44,7 @@ static f32 prevHeight = -10000.0f;
 static u8 activeEffects = 0;
 static u32 effectCountdown = 1;
 static struct NpcScaleData npcScaleBuffer[] = {[0 ... MAX_NPCS] = {-1, {0, 0, 0}} };
+static u32 effectCorruptionCountdown = 0;
 
 static void perilSound() {
     if (frameCount % 25 == 0) {
@@ -230,6 +231,14 @@ static void randomMessage() {
     start_script(&N(EVS_Random_Tattle), EVT_PRIORITY_A, 0);
 }
 
+static void randomlyColorBackgroundPal() {
+    BackgroundHeader* bg = &gBackgroundImage;
+    u8* pal = bg->palette;
+    u8 randPalByteOffset = rand_int(512 - 1);
+
+    pal[randPalByteOffset] = rand_int(255);
+}
+
 struct EffectData effectData[] = {
     {"Peril Sound",     TRUE,   0,  45, perilSound,     NULL},
     {"Rewind",          TRUE,   0,  45, posLoad,        NULL},
@@ -241,7 +250,8 @@ struct EffectData effectData[] = {
     {"Slow Go",         FALSE,  0,  45, slowGo,         slowGo},
     {"Top-Down Cam",    FALSE,  0,  45, topDownCam,     topDownCam},
     {"Negative Attack", FALSE,  0,  45, negativeAttack, negativeAttack},
-    {"Random Tattle",   FALSE,  0,  0,  randomMessage,  NULL}
+    {"Random Tattle",   FALSE,  0,  0,  randomMessage,  NULL},
+    {"Randomly Color Background",   TRUE,  0,  60,  randomlyColorBackgroundPal,  NULL}
 };
 
 #define EFFECT_COUNT (ARRAY_COUNT(effectData))
