@@ -95,6 +95,7 @@ EvtScript BtlBringPartnerOut = {
 };
 
 extern HudScript HES_HPBar;
+extern HudScript HES_HPBar2;
 extern HudScript HES_SmallStarPoint;
 extern HudScript HES_ItemStarPoint;
 extern HudScript HES_StatusSPShine;
@@ -199,7 +200,7 @@ void initialize_battle(void) {
     btl_popup_messages_init();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_BATTLE);
-    D_8029EFBC = hud_element_create(&HES_HPBar);
+    D_8029EFBC = hud_element_create(&HES_HPBar2);
     hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAG_80);
 
     for (i = 0; i < ARRAY_COUNT(BtlStarPointTensHIDs); i++) {
@@ -900,7 +901,7 @@ void btl_draw_enemy_health_bars(void) {
                         screenY += 16;
                         id = D_8029EFBC;
                         hud_element_set_render_depth(id, 10);
-                        hud_element_set_script(id, &HES_HPBar);
+                        hud_element_set_script(id, &HES_HPBar2);
                         hud_element_set_render_pos(id, screenX, screenY);
                         hud_element_draw_clipped(id);
 

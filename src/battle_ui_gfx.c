@@ -50,6 +50,9 @@ INCLUDE_PAL("ui/battle/yellow_arrow.pal", ui_battle_yellow_arrow_pal);
 INCLUDE_IMG("ui/battle/hp_bar.png", ui_battle_hp_bar_png);
 INCLUDE_PAL("ui/battle/hp_bar.pal", ui_battle_hp_bar_pal);
 
+INCLUDE_IMG("ui/battle/hp_bar2.png", ui_battle_hp2_bar_png);
+INCLUDE_PAL("ui/battle/hp_bar2.pal", ui_battle_hp2_bar_pal);
+
 INCLUDE_IMG("ui/battle/hp_0.png", ui_battle_hp_0_png);
 INCLUDE_PAL("ui/battle/hp_0.pal", ui_battle_hp_0_pal);
 
@@ -249,6 +252,8 @@ Gfx D_80291C78[] = {
 INCLUDE_IMG("ui/battle/swap_background.png", ui_battle_swap_background_png);
 
 HudScript HES_HPBar = HES_TEMPLATE_CI_ENUM_SIZE(ui_battle_hp_bar, 32, 16);
+
+HudScript HES_HPBar2 = HES_TEMPLATE_CI_ENUM_SIZE(ui_battle_hp2_bar, 32, 16);
 
 HudScript HES_HPDigit0 = HES_TEMPLATE_CI_ENUM_SIZE(ui_battle_hp_0, 8, 8);
 
