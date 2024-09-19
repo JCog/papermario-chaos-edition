@@ -187,7 +187,7 @@ void btl_set_state(s32 battleState) {
         gBattleState = battleState;
     }
 }
-
+extern char* BackgroundFileList[18];
 void btl_state_update_normal_start(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -241,7 +241,14 @@ void btl_state_update_normal_start(void) {
             load_battle_hit_asset(stage->hit);
 
             if (stage->bg != NULL) {
-                load_map_bg(stage->bg);
+                //load_map_bg(stage->bg);
+                //50/50 to load random background
+                if (rand_int(100) < 50) {
+                    load_map_bg(BackgroundFileList[rand_int(ARRAY_COUNT(BackgroundFileList) - 1)]);
+                } else {
+                    //load normal battle map background
+                    load_map_bg(stage->bg);
+                }
                 set_background(&gBackgroundImage);
             }
 

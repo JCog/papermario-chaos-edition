@@ -6,7 +6,6 @@
 #include "overlay.h"
 #include "game_modes.h"
 #include "dx/profiling.h"
-#include "dx/debug_menu.h"
 
 s32 gOverrideFlags;
 s32 timeFreezeMode;
@@ -49,6 +48,7 @@ s32 gPauseBackgroundFade = 0;
 s32 D_800741FC = 0;
 
 void gfx_init_state(void);
+
 void gfx_draw_background(void);
 
 void step_game_loop(void) {
@@ -270,6 +270,7 @@ void gfx_draw_frame(void) {
     #if DX_DEBUG_MENU
     dx_debug_console_main();
     #endif
+    chaosUpdate();
 
     ASSERT((s32)(((u32)(gMainGfxPos - gDisplayContext->mainGfx) << 3) >> 3) < ARRAY_COUNT(gDisplayContext->mainGfx));
 

@@ -13,7 +13,7 @@
 #define DX_DEBUG_MENU 1
 
 /// Loads last used save file.
-#define DX_QUICK_LAUNCH 0
+#define DX_QUICK_LAUNCH 1
 
 /// Quick launch into this battle.
 /// Comment out to disable,
@@ -30,6 +30,7 @@
 
 /// Map to load when starting a new game.
 #define NEW_GAME_MAP_ID "kmr_20"
+//#define NEW_GAME_MAP_ID "mac_01"
 
 /// Entry to use when starting a new game.
 #define NEW_GAME_ENTRY_ID kmr_20_ENTRY_0

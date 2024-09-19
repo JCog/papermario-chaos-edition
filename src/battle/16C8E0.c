@@ -103,6 +103,7 @@ EvtScript BtlBringPartnerOut = {
 };
 
 extern HudScript HES_HPBar;
+extern HudScript HES_HPBar2;
 extern HudScript HES_SmallStarPoint;
 extern HudScript HES_ItemStarPoint;
 extern HudScript HES_StatusSPShine;
@@ -157,12 +158,20 @@ void func_8023E11C(void) {
     D_802809F5 = 0;
 }
 
+HudScript* cur_hp_image = NULL;
+
 void initialize_battle(void) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     Camera* tattleCam = &gCameras[CAM_TATTLE];
     s32 hudElemID;
     s32 i;
+
+    if ( rand_int(1) ) {
+        cur_hp_image = &HES_HPBar;
+    } else {
+        cur_hp_image = &HES_HPBar2;
+    }
 
     gBattleStatus.flags1 = 0;
     gBattleStatus.flags2 = 0;
@@ -207,7 +216,7 @@ void initialize_battle(void) {
     btl_popup_messages_init();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_BATTLE);
-    D_8029EFBC = hud_element_create(&HES_HPBar);
+    D_8029EFBC = hud_element_create(cur_hp_image);
     hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAG_80);
 
     for (i = 0; i < ARRAY_COUNT(BtlStarPointTensHIDs); i++) {
@@ -908,7 +917,7 @@ void btl_draw_enemy_health_bars(void) {
                         screenY += 16;
                         id = D_8029EFBC;
                         hud_element_set_render_depth(id, 10);
-                        hud_element_set_script(id, &HES_HPBar);
+                        hud_element_set_script(id, cur_hp_image);
                         hud_element_set_render_pos(id, screenX, screenY);
                         hud_element_draw_clipped(id);
 

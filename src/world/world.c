@@ -10,6 +10,8 @@
 #include "dx/debug_menu.h"
 #include "world/surfaces.h"
 
+extern char* BackgroundFileList[18];
+
 #ifdef SHIFT
 #define ASSET_TABLE_ROM_START (s32) mapfs_ROM_START
 #elif VERSION_JP
@@ -140,7 +142,15 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     }
 
     if (mapConfig->bgName != NULL) {
-        load_map_bg(wMapBgName);
+        //50/50 to load random background
+        if (rand_int(100) < 50) {
+            char* randBackgroundStr = BackgroundFileList[rand_int(ARRAY_COUNT(BackgroundFileList) - 1)];
+            strcpy(wMapBgName, randBackgroundStr);
+            load_map_bg(wMapBgName);
+        } else {
+            //load normal map
+            load_map_bg(wMapBgName);
+        }
     }
 
 #if !VERSION_IQUE

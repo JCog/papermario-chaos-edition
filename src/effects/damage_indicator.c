@@ -24,11 +24,23 @@ extern Gfx D_090021A8_3523C8[];
 extern Gfx D_090021C0_3523E0[];
 extern Gfx D_090021E0_352400[];
 extern Gfx D_09002200_352420[];
+extern Gfx D_090021C0_3523E0_2[];
+extern Gfx D_090021E0_352400_2[];
+extern Gfx D_09002200_352420_2[];
 
 Gfx* D_E003CCA0[] = {
-    D_09001E50_352070, D_09001E90_3520B0, D_09001ED0_3520F0, D_09001F10_352130,
-    D_09001F50_352170, D_09001F90_3521B0, D_09001FD0_3521F0, D_09002010_352230,
-    D_09002050_352270, D_09002090_3522B0, D_090020D0_3522F0, D_09002110_352330
+    D_09001E50_352070, //0
+    D_09001E90_3520B0, //1
+    D_09001ED0_3520F0, //2
+    D_09001F10_352130, //3
+    D_09001F50_352170, //4
+    D_09001F90_3521B0, //5
+    D_09001FD0_3521F0, //6
+    D_09002010_352230, //7
+    D_09002050_352270, //8
+    D_09002090_3522B0, //9
+    D_090020D0_3522F0, //-
+    D_09002110_352330 //+
 };
 
 u8 D_E003CCD0[] = {
@@ -65,6 +77,8 @@ f32 D_E003CD1C[] = {
     0.7f,
     0.8f
 };
+
+u32 palToUse = 0;
 
 void damage_indicator_init(EffectInstance* effect);
 void damage_indicator_update(EffectInstance* effect);
@@ -128,6 +142,9 @@ void damage_indicator_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 starsRadi
 }
 
 void damage_indicator_init(EffectInstance* effect) {
+    if (chaosNegativeAttack) {
+        palToUse = 1;   
+    }
 }
 
 void damage_indicator_update(EffectInstance* effect) {
@@ -198,7 +215,7 @@ void damage_indicator_render_impl(EffectInstance* effect) {
     Matrix4f mtxTemp;
     s32 spA0;
     s32 lastPartIdx;
-    s32 numParts = part->damageAmt;
+    s32 damage = part->damageAmt;
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
@@ -270,16 +287,31 @@ void damage_indicator_render_impl(EffectInstance* effect) {
             gSPDisplayList(gMainGfxPos++, D_090021A8_3523C8);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, D_09001DE0_352000);
-            if (numParts < 10) {
-                gSPDisplayList(gMainGfxPos++, D_E003CCA0[i]);
-                gSPDisplayList(gMainGfxPos++, D_090021C0_3523E0);
+            if (damage < 10) {
+                if (palToUse) {
+                    //green damage numbers
+                    gSPDisplayList(gMainGfxPos++, D_E003CCA0[i]);
+                    gSPDisplayList(gMainGfxPos++, D_090021C0_3523E0_2);                    
+                } else {
+                    gSPDisplayList(gMainGfxPos++, D_E003CCA0[i]);
+                    gSPDisplayList(gMainGfxPos++, D_090021C0_3523E0);
+                }
             } else {
-                s32 onesDigit = numParts % 10;
-                s32 tensDigit = numParts / 10;
-                gSPDisplayList(gMainGfxPos++, D_E003CCA0[onesDigit]); // GfxLoadDigitTex
-                gSPDisplayList(gMainGfxPos++, D_09002200_352420); // GfxDrawOnesQuad
-                gSPDisplayList(gMainGfxPos++, D_E003CCA0[tensDigit]);
-                gSPDisplayList(gMainGfxPos++, D_090021E0_352400); // GfxDrawTensQuad
+                s32 onesDigit = damage % 10;
+                s32 tensDigit = damage / 10;
+
+                if (palToUse) {
+                    //green damage numbers
+                    gSPDisplayList(gMainGfxPos++, D_E003CCA0[onesDigit]); // GfxLoadDigitTex
+                    gSPDisplayList(gMainGfxPos++, D_09002200_352420_2); // GfxDrawOnesQuad
+                    gSPDisplayList(gMainGfxPos++, D_E003CCA0[tensDigit]);
+                    gSPDisplayList(gMainGfxPos++, D_090021E0_352400_2); // GfxDrawTensQuad                 
+                } else {
+                    gSPDisplayList(gMainGfxPos++, D_E003CCA0[onesDigit]); // GfxLoadDigitTex
+                    gSPDisplayList(gMainGfxPos++, D_09002200_352420); // GfxDrawOnesQuad
+                    gSPDisplayList(gMainGfxPos++, D_E003CCA0[tensDigit]);
+                    gSPDisplayList(gMainGfxPos++, D_090021E0_352400); // GfxDrawTensQuad
+                }
             }
         } else {
             gSPDisplayList(gMainGfxPos++, D_09002190_3523B0);

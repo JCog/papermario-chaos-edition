@@ -94,6 +94,7 @@ segments:
     - [auto, c, main_pre]
     - [auto, c, main]
     - [auto, c, main_loop]
+    - [auto, c, chaos]
     - [auto, c, background_gfx]
     - [auto, c, input]
     - [auto, c, rumble]
@@ -1478,6 +1479,8 @@ segments:
       - [0x1C0558]
       - [0x1C0560, ia8, ui/battle/swap_background, 48, 16]
       - [0x1C0860]
+      - [auto, ci4, ui/battle/hp_bar2, 32, 16]
+      - [auto, palette, ui/battle/hp_bar2]  
     - [0x1CB240]
   - [0x1CC310, pm_icons, icon]
   - dir: logos
@@ -2387,6 +2390,9 @@ segments:
       - [0x3523E0, gfx, D_090021C0_3523E0]
       - [0x352400, gfx, D_090021E0_352400]
       - [0x352420, gfx, D_09002200_352420]
+      - [auto, .gfx, D_090021E0_352400_2]
+      - [auto, .gfx, D_090021C0_3523E0_2]
+      - [auto, .gfx, D_09002200_352420_2]
   - name: effect_purple_ring
     dir: effects
     type: code

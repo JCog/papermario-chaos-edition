@@ -127,7 +127,7 @@ void state_init_end_battle(void) {
     nuContRmbForceStop();
     D_800A0900 = 5;
 }
-
+extern char* BackgroundFileList[18];
 void state_step_end_battle(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
@@ -184,8 +184,14 @@ void state_step_end_battle(void) {
                 if (mapConfig->dmaStart != NULL) {
                     dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                 }
-
-                load_map_bg(mapConfig->bgName);
+                //50/50 to load random background
+                if (rand_int(100) < 50) {
+                    load_map_bg(BackgroundFileList[rand_int(ARRAY_COUNT(BackgroundFileList) - 1)]);
+                } else {
+                    //load normal battle map background
+                    load_map_bg(mapConfig->bgName);
+                }
+                // load_map_bg(mapConfig->bgName);
                 if (mapSettings->background != NULL) {
                     set_background(mapSettings->background);
                 } else {
